@@ -16,13 +16,13 @@ const FriendsList = (props) => {
             .catch (err=> {
                 console.error(err);
             })
-    }, [friends])
+    }, [])
 
     return(
         <div>
-            <AddFriend/>
+            <AddFriend setFriends={setFriends}/>
             <ul>
-                {friends.map(element => <li key={element.id}>{element.name}</li>)}
+                {friends.map(element => <li key={element.id}>{element.name} - age: {element.age} - email: {element.email}</li>)}
             </ul>
         </div>
     );

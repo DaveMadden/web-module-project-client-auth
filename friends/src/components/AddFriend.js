@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-const AddFriend = (props) => {
+const initialFormState = {
+    name: "",
+    age: "",
+    email: ""
+}
 
-    const [newFriend, setNewFriend] = useState({});
+const AddFriend = ({setFriends}) => {
 
-    useEffect(()=>{
-        axiosWithAuth()
-            .get('/friends')
-            .then(resp=>{
-                console.log(resp.data);
-                
-            })
-            .catch (err=> {
-                console.error(err);
-            })
-    }, [])
+    const [newFriend, setNewFriend] = useState(initialFormState);
 
     const handleChange = (e) => {
         setNewFriend({
@@ -32,11 +26,12 @@ const AddFriend = (props) => {
             .post('/friends', newFriend)
             .then(resp=>{
                 console.log(resp.data)
+                setFriends(resp.data)
             })
             .catch(err=>{
                 console.error(err);
             })
-            .finally(setNewFriend({}))
+            .finally(setNewFriend(initialFormState))
     }
 
     return(
