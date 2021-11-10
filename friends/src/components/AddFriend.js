@@ -25,7 +25,6 @@ const AddFriend = ({setFriends}) => {
         axiosWithAuth()
             .post('/friends', newFriend)
             .then(resp=>{
-                console.log(resp.data)
                 setFriends(resp.data)
             })
             .catch(err=>{
